@@ -3,7 +3,6 @@
 
 {% block content %}
     <h1>Search in a specific field</h1>
-    <a href="{{ url_for('index') }}">← Back</a>
     <form method="POST">
         <input type="text" name="query_term" placeholder="Enter term..." value="{{ query }}" required>
         <select name="field">

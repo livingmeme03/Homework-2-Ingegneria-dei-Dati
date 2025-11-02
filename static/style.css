@@ -7,6 +7,10 @@ body {
     color: #333;
 }
 
+a {
+    text-decoration: none; 
+}
+
 /* === Navbar === */
 .navbar {
     background: #3498db;
@@ -21,6 +25,17 @@ body {
 .navbar h1 {
     margin: 0;
     font-size: 1.4em;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* space between title and images */
+}
+
+.char-icon {
+    height: 30px;   /* adjust as needed */
+    width: auto;
 }
 
 .nav-links a {

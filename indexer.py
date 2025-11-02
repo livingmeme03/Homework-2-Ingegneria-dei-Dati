@@ -11,11 +11,11 @@ mapping = {
         'analysis':{
             'analyzer': {
                 'title_analyzer' : {
-                    'tokenizer' : 'underscore_tokenizer'
-                },
+                    'tokenizer' : 'underscore_tokenizer'    #we assume that titles are in the form name_number.txt
+                },                                          #since this is a very small test use-case
                 'content_analyzer' : {
                     'type' : 'standard',
-                    'stopwords' : '_english_'
+                    'stopwords' : '_english_'               #might add emoji handling later
                 }
             },
             'tokenizer': {
@@ -39,8 +39,11 @@ mapping = {
     }
 }
 
+
+#Delete index just in case
 utils.delete_index('nice_index')
 
+#To measure time taken to create the index
 start = time.time()
 
 elastic_search.indices.create(index='nice_index', body=mapping)

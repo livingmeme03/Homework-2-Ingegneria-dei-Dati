@@ -4,9 +4,17 @@ from elasticsearch import Elasticsearch
 ES_HOST = "http://127.0.0.1:9200" #security is disabled for testing purposes
 es = Elasticsearch(ES_HOST)
 
+
+
+# Deletes the index given as a parameter
+
 def delete_index(index_name): #just in case
     res = es.indices.delete(index=index_name)
     print(res)
+
+
+
+#Converts the .txt files to a list of dicts to send to ES server
 
 def txt_to_dict():
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -26,6 +34,9 @@ def txt_to_dict():
     return files_data
 
 
+
+#UTILS TO TEST ANALYZERS =================================================================================
+
 def test_analyzer_content(filename):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     files_path = os.path.join(script_dir, "files")
@@ -39,6 +50,9 @@ def test_analyzer_content(filename):
 def test_analyzer_title(filename):
     return es.indices.analyze(index='nice_index', analyzer='title_analyzer', text=filename)
 
+
+
+#UTILS TO TEST ANALYZERS IN BATCH =================================================================================
 
 def test_analyzer_content_all():
     script_dir = os.path.dirname(os.path.abspath(__file__))

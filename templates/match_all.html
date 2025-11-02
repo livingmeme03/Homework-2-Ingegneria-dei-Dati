@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Match Search{% endblock %}
+
+{% block content %}
+    <h1>Full dataset here:</h1>
+    <a href="{{ url_for('index') }}">← Back</a>
+
+    {% if results %}
+        <h2>Results ({{ results|length }})</h2>
+        {% for r in results %}
+            <div class="result">
+                <div class="title"><strong>{{ r.title }}</strong></div>
+                <div class="content">{{ r.content }}</div>
+                <div class="score">Score: {{ r.score|round(2) }}</div>
+            </div>
+        {% endfor %}
+    {% elif query %}
+        <p>No results found for "{{ query }}".</p>
+    {% endif %}
+{% endblock %}

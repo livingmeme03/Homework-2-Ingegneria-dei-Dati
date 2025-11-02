@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Match Search{% endblock %}
+
+{% block content %}
+    <h1>Search in a specific field</h1>
+    <a href="{{ url_for('index') }}">← Back</a>
+    <form method="POST">
+        <input type="text" name="query_term" placeholder="Enter term..." value="{{ query }}" required>
+        <select name="field">
+            <option value="title" {% if field == 'title' %}selected{% endif %}>Title</option>
+            <option value="content" {% if field == 'content' %}selected{% endif %}>Content</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Results ({{ results|length }})</h2>
+        {% for r in results %}
+            <div class="result">
+                <div class="title"><strong>{{ r.title }}</strong></div>
+                <div class="content">{{ r.content }}</div>
+                <div class="score">Score: {{ r.score|round(2) }}</div>
+            </div>
+        {% endfor %}
+    {% elif query %}
+        <p>No results found for "{{ query }}".</p>
+    {% endif %}
+{% endblock %}

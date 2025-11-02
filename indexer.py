@@ -41,7 +41,7 @@ mapping = {
 
 
 #Delete index just in case
-utils.delete_index('nice_index')
+print(utils.delete_index('nice_index'))
 
 #To measure time taken to create the index
 start = time.time()

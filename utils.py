@@ -10,7 +10,7 @@ es = Elasticsearch(ES_HOST)
 
 def delete_index(index_name): #just in case
     res = es.indices.delete(index=index_name)
-    print(res)
+    #print(res)
 
 
 
@@ -74,3 +74,19 @@ def test_analyzer_title_all():
         print("SEPARATORE SEXY")
         print("\n")
         print(test_analyzer_title(filename))
+
+
+
+#QUERY STUFF =================================================================================================
+
+def query(query):
+    query_result = es.search(index='nice_index', body=query)
+    return query_result
+
+def print_query_results(query_to_do):
+    query_result = query(query_to_do)
+    num_docs = len(query_result["hits"]["hits"])
+    print(f"Found {num_docs} documents")
+    for i, hit in enumerate(query_result["hits"]["hits"]):
+        doc_filename = hit["_source"]["title"]
+        print(f"Document number {i+1}: {doc_filename}")

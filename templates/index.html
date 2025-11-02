@@ -1,61 +1,14 @@
-<html>
-    <head>
-    <meta charset="UTF-8">
-    <title>Text Search</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background: #f9f9f9;
-        }
-        h1 { color: #333; }
-        form {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        input[type="text"] {
-            width: 60%;
-            padding: 8px;
-            margin-right: 10px;
-        }
-        select, button {
-            padding: 8px;
-        }
-        .result {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 4px rgba(0,0,0,0.1);
-        }
-        .title { font-weight: bold; font-size: 1.2em; color: #0074d9; }
-        .content { margin-top: 5px; }
-    </style>
-</head>
-<body>
-    <h1>hOI!!! TEMMIE SEARCH!!</h1>
-    <form method="POST">
-        <input type="text" name="query_term" placeholder="Enter your search term..." value="{{ query_term }}" required>
-        <select name="field">
-            <option value="title" {% if field == 'title' %}selected{% endif %}>Title</option>
-            <option value="content" {% if field == 'content' %}selected{% endif %}>Content</option>
-        </select>
-        <button type="submit">Search</button>
-    </form>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 
-    {% if results %}
-        <h2>Results ({{ results|length }})</h2>
-        {% for r in results %}
-            <div class="result">
-                <div class="title">{{ r.title }}</div>
-                <div class="content">{{ r.content }}</div>
-                <div class="score">Score: {{ r.score|round(2) }}</div>
-            </div>
-        {% endfor %}
-    {% elif query_term %}
-        <p>No results found for "<strong>{{ query_term }}</strong>".</p>
-    {% endif %}
-</html>
+{% block content %}
+<h2>Choose a Search Type</h2>
+<p>Select one of the following search modes:</p>
+
+<div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+    <a href="{{ url_for('match_all') }}" class="btn">View All Documents</a>
+    <a href="{{ url_for('match') }}" class="btn">Match Search</a>
+    <a href="{{ url_for('multi') }}" class="btn">Multi-field Search</a>
+    <a href="{{ url_for('phrase') }}" class="btn">Phrase Search</a>
+</div>
+{% endblock %}

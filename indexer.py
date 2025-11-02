@@ -11,7 +11,10 @@ mapping = {
         'analysis':{
             'analyzer': {
                 'title_analyzer' : {
-                    'tokenizer' : 'underscore_tokenizer'    #we assume that titles are in the form name_number.txt
+                    'tokenizer' : 'underscore_tokenizer',    #we assume that titles are in the form name_number.txt
+                    'filter' : [
+                        'lowercase'
+                    ]
                 },                                          #since this is a very small test use-case
                 'content_analyzer' : {
                     'type' : 'standard',
